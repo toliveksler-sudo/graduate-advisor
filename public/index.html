@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎓 Советник Выпускника 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Stars background -->
+<div class="stars" id="stars"></div>
+<div class="stars2" id="stars2"></div>
+
+<!-- LANDING PAGE -->
+<div id="page-landing" class="page active">
+  <div class="landing-content">
+    <div class="logo-star">✦</div>
+    <h1 class="landing-title">Советник<br><span class="gradient-text">Выпускника 2026</span></h1>
+    <p class="landing-sub">Нумерология · Психология · Карьера · ИИ-анализ</p>
+    <p class="landing-desc">Команда экспертов — нумеролог-астролог, психолог, психиатр и специалист по рынку труда — поможет выбрать путь после школы</p>
+
+    <div class="lang-select">
+      <button class="lang-btn active" data-lang="ru" onclick="selectLang('ru')">🇷🇺 Русский</button>
+      <button class="lang-btn" data-lang="en" onclick="selectLang('en')">🇬🇧 English</button>
+    </div>
+
+    <div class="grade-select">
+      <p class="grade-label" id="txt-choose-grade">Выберите класс:</p>
+      <button class="grade-btn" onclick="selectGrade('9')">
+        <span class="grade-num">9</span>
+        <span class="grade-text" id="txt-grade9">класс → Колледж</span>
+      </button>
+      <button class="grade-btn" onclick="selectGrade('11')">
+        <span class="grade-num">11</span>
+        <span class="grade-text" id="txt-grade11">класс → Институт</span>
+      </button>
+    </div>
+
+    <div class="experts-row">
+      <div class="expert-chip">🔮 Нумеролог</div>
+      <div class="expert-chip">🧠 Психолог</div>
+      <div class="expert-chip">🩺 Психиатр</div>
+      <div class="expert-chip">📊 Карьера</div>
+    </div>
+  </div>
+</div>
+
+<!-- QUESTIONNAIRE PAGE -->
+<div id="page-questionnaire" class="page">
+
+  <!-- Top bar -->
+  <div class="top-bar">
+    <button class="back-btn" onclick="goBack()">← <span id="txt-back">Назад</span></button>
+    <div class="progress-info">
+      <span id="section-name">Основная информация</span>
+      <span id="section-counter">1 / 8</span>
+    </div>
+    <div class="lang-mini">
+      <button onclick="selectLang('ru')" id="mini-ru">RU</button>
+      <button onclick="selectLang('en')" id="mini-en">EN</button>
+    </div>
+  </div>
+
+  <!-- Progress bar -->
+  <div class="progress-bar-wrap">
+    <div class="progress-bar" id="progress-bar"></div>
+  </div>
+
+  <!-- Astro badge (shown during numerology section) -->
+  <div class="astro-badge" id="astro-badge" style="display:none">
+    <div class="astro-inner" id="astro-inner"></div>
+  </div>
+
+  <!-- Questions container -->
+  <div class="questions-container" id="questions-container">
+    <!-- Injected by app.js -->
+  </div>
+
+  <!-- Navigation -->
+  <div class="nav-bar">
+    <button class="btn-prev" id="btn-prev" onclick="prevSection()">← <span id="txt-prev">Назад</span></button>
+    <button class="btn-next" id="btn-next" onclick="nextSection()"><span id="txt-next">Далее</span> →</button>
+  </div>
+</div>
+
+<!-- LOADING PAGE -->
+<div id="page-loading" class="page">
+  <div class="loading-content">
+    <div class="loading-orb"></div>
+    <div class="loading-rings">
+      <div class="ring ring1"></div>
+      <div class="ring ring2"></div>
+      <div class="ring ring3"></div>
+    </div>
+    <h2 id="txt-analyzing">Команда экспертов анализирует данные...</h2>
+    <div class="loading-steps" id="loading-steps">
+      <div class="step active" id="step1">🔮 Нумеролог рассчитывает числа судьбы...</div>
+      <div class="step" id="step2">🧠 Психолог составляет профиль личности...</div>
+      <div class="step" id="step3">🩺 Психиатр оценивает зрелость...</div>
+      <div class="step" id="step4">📊 Анализируется рынок труда 2026-2030...</div>
+      <div class="step" id="step5">🎓 Подбираются учебные заведения...</div>
+    </div>
+  </div>
+</div>
+
+<!-- RESULTS PAGE -->
+<div id="page-results" class="page">
+  <div class="results-top">
+    <div class="results-header">
+      <h1 id="txt-results-title">Ваш персональный анализ</h1>
+      <div class="results-actions">
+        <button class="btn-action" onclick="window.print()">🖨️ <span id="txt-print">Печать</span></button>
+        <button class="btn-action" onclick="restartApp()">🔄 <span id="txt-restart">Заново</span></button>
+      </div>
+    </div>
+
+    <!-- Avatar -->
+    <div class="avatar-section" id="avatar-section">
+      <div class="avatar-wrap">
+        <div id="avatar-container"></div>
+        <div class="avatar-bubble" id="avatar-bubble">
+          <p id="avatar-text">Привет! Я проанализировала твои данные. Нажми кнопку, чтобы услышать резюме.</p>
+        </div>
+      </div>
+      <button class="btn-speak" id="btn-speak" onclick="toggleSpeak()">
+        🔊 <span id="txt-speak">Озвучить резюме</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Numerology card -->
+  <div class="result-card numerology-card" id="numerology-card"></div>
+
+  <!-- AI Results -->
+  <div class="result-card ai-result" id="ai-result">
+    <div class="ai-result-content" id="ai-result-content">
+      <div class="streaming-cursor">|</div>
+    </div>
+  </div>
+
+  <div class="result-footer">
+    <button class="btn-big" onclick="restartApp()">🔄 <span id="txt-new-analysis">Новый анализ</span></button>
+  </div>
+</div>
+
+<script src="questions.js"></script>
+<script src="avatar.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
