@@ -87,6 +87,7 @@ app.post('/api/numerology', (req, res) => {
 app.post('/api/analyze', async (req, res) => {
   const { data } = req.body;
   if (!data) return res.status(400).json({ error: 'Data required' });
+  console.log(`📊 Analyze request: grade=${data.grade}, name=${data.name}, city=${data.city}`);
 
   const isEn = data.language === 'en';
   const lang = isEn ? 'English' : 'русский язык';
@@ -359,7 +360,8 @@ async function streamFromGroq(prompt, res) {
 
     if (!response.ok) {
       const err = await response.text();
-      res.write(`data: ${JSON.stringify({ error: 'Groq error: ' + err })}\n\n`);
+      console.error('❌ Groq API error:', response.status, err);
+      res.write(`data: ${JSON.stringify({ error: 'Groq ошибка ' + response.status + ': ' + err })}\n\n`);
       res.write('data: [DONE]\n\n');
       res.end();
       return;
@@ -380,6 +382,7 @@ async function streamFromGroq(prompt, res) {
           const parsed = JSON.parse(data);
           const text = parsed.choices?.[0]?.delta?.content || '';
           if (text) res.write(`data: ${JSON.stringify({ text })}\n\n`);
+          if (parsed.error) console.error('❌ Groq stream error:', parsed.error);
         } catch(e) {}
       }
     }

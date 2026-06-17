@@ -530,6 +530,10 @@ async function streamAnalysis(payload) {
             resultContent.innerHTML = renderMarkdown(fullText) + '<span class="streaming-cursor">|</span>';
             resultContent.scrollIntoView({ behavior: 'smooth', block: 'end' });
           }
+          if (parsed.error) {
+            fullText = '⚠️ Ошибка ИИ: ' + parsed.error + '\n\nПопробуй нажать "Заново" и пройти тест ещё раз.';
+            resultContent.innerHTML = `<p style="color:#EF4444;font-size:16px;line-height:1.6">${fullText}</p>`;
+          }
         } catch(e) {}
       }
     }
