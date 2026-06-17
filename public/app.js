@@ -312,9 +312,10 @@ function renderCurrentSection() {
     container.appendChild(renderEGESection());
   }
 
-  const page = document.getElementById('page-questionnaire');
-  if (page) page.scrollTop = 0;
-  container.scrollTop = 0;
+  requestAnimationFrame(() => {
+    const page = document.getElementById('page-questionnaire');
+    if (page) page.scrollTop = 0;
+  });
 }
 
 function getQuestionNumber(idx) {
