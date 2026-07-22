@@ -441,20 +441,24 @@ function streamFromOllama(prompt, res) {
 }
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log('\n╔══════════════════════════════════════════════╗');
-  console.log('║   🎓 GRADUATE ADVISOR 2026                   ║');
-  console.log('║   Советник для выпускников 9 и 11 класса     ║');
-  console.log(`║   Открыть: http://localhost:${PORT}             ║`);
-  console.log('╠══════════════════════════════════════════════╣');
-  if (USE_CLAUDE)   console.log('║   🤖 Режим: Claude (Anthropic)               ║');
-  else if (USE_DEEPSEEK) console.log(`║   🐋 Режим: DeepSeek (${DEEPSEEK_MODEL.padEnd(20)}) ║`);
-  else if (USE_GROK)     console.log(`║   ⚡ Режим: Grok/xAI (${GROK_MODEL.padEnd(20)}) ║`);
-  else if (USE_GROQ)     console.log(`║   🚀 Режим: Groq (${GROQ_MODEL.substring(0,24).padEnd(24)}) ║`);
-  else if (USE_YANDEX)   console.log('║   🔮 Режим: YandexGPT (Alice AI)             ║');
-  else {
-    console.log(`║   🦙 Режим: Ollama локальный (${OLLAMA_MODEL.padEnd(13)})║`);
-    console.log('║   ⚠️  Убедись что Ollama запущена!           ║');
-  }
-  console.log('╚══════════════════════════════════════════════╝\n');
-});
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log('\n╔══════════════════════════════════════════════╗');
+    console.log('║   🎓 GRADUATE ADVISOR 2026                   ║');
+    console.log('║   Советник для выпускников 9 и 11 класса     ║');
+    console.log(`║   Открыть: http://localhost:${PORT}             ║`);
+    console.log('╠══════════════════════════════════════════════╣');
+    if (USE_CLAUDE)   console.log('║   🤖 Режим: Claude (Anthropic)               ║');
+    else if (USE_DEEPSEEK) console.log(`║   🐋 Режим: DeepSeek (${DEEPSEEK_MODEL.padEnd(20)}) ║`);
+    else if (USE_GROK)     console.log(`║   ⚡ Режим: Grok/xAI (${GROK_MODEL.padEnd(20)}) ║`);
+    else if (USE_GROQ)     console.log(`║   🚀 Режим: Groq (${GROQ_MODEL.substring(0,24).padEnd(24)}) ║`);
+    else if (USE_YANDEX)   console.log('║   🔮 Режим: YandexGPT (Alice AI)             ║');
+    else {
+      console.log(`║   🦙 Режим: Ollama локальный (${OLLAMA_MODEL.padEnd(13)})║`);
+      console.log('║   ⚠️  Убедись что Ollama запущена!           ║');
+    }
+    console.log('╚══════════════════════════════════════════════╝\n');
+  });
+}
+
+module.exports = app;

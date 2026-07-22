@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: graduate-advisor-2026
+    name: graduate-advisor
     runtime: node
     buildCommand: npm install
     startCommand: node server.js

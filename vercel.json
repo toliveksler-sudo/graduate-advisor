@@ -1,0 +1,18 @@
+{
+  "services": {
+    "graduate-advisor": {
+      "root": ".",
+      "buildCommand": "npm install",
+      "entrypoint": "server.js"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": {
+        "type": "service",
+        "service": "graduate-advisor"
+      }
+    }
+  ]
+}
